@@ -15,6 +15,13 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  /**
+   * essa config permiti subir o projeto num server local gerando um reload a 
+   * cada save
+   */
+  devServer: {
+    contentBase: path.resolve(__dirname, 'public', 'índex.html')
+  },
   plugins: [
     /**
      * Inserir bundle no index.html de forma auto 
