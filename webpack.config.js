@@ -5,14 +5,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 module.exports = {
-  mode: 'development',
+  mode: isDevelopment ? 'development' : 'production',
   /**
    * devTool permite que você configure um source map (para facilitar o debug)
    * eval-source-map é uma das maneiras, existem outras + ou - detalhadas 
    * que afetam + ou - no desempenho do reload
    */
-  devtool: 'eval-source-map',
+  devtool: isDevelopment ? 'eval-source-map' : 'source-map',
   entry: path.resolve(__dirname, 'src', 'index.jsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
