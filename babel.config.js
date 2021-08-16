@@ -1,8 +1,10 @@
 module.exports = {
   presets: [
     '@babel/preset-env',
-    // essa config insenta a necessidade import React from 'react' nos files
-    ['@babel/preset-react', { 
+    /**
+     * Essa config isenta a necessidade de importar React nos .jsx files
+     */
+    ['@babel/preset-react', {
       runtime: 'automatic'
     }]
   ]
