@@ -7,6 +7,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
+  /**
+   * devTool permite que você configure um source map (para facilitar o debug)
+   * eval-source-map é uma das maneiras, existem outras + ou - detalhadas 
+   * que afetam + ou - no desempenho do reload
+   */
+  devtool: 'eval-source-map',
   entry: path.resolve(__dirname, 'src', 'index.jsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
