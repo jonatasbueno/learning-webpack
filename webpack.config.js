@@ -4,6 +4,7 @@
  */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -28,22 +29,34 @@ module.exports = {
    * cada save
    */
   devServer: {
-    contentBase: path.resolve(__dirname, 'public', 'índex.html')
+    contentBase: path.resolve(__dirname, 'public', 'índex.html'),
+    hot: true
   },
   plugins: [
+    /**
+     * 'react-refresh-webpack-plugin' permite reload sem perder o estado atual
+     */
+    isDevelopment && new ReactRefreshWebpackPlugin(),
     /**
      * Inserir bundle no index.html de forma auto 
      */
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html')
     })
-  ],
+  ].filter(Boolean),
   module: {
     rules: [
       {
         test: /\.jsx$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              isDevelopment && require.resolve('react-refresh/babel')
+            ].filter(Boolean)
+          }
+        }
       },
       {
         test: /\.scss$/,
